@@ -247,6 +247,6 @@ class YouTubeDownloader
             return $this->selectFirst($result, $selector);
         }
 
-        return $json;
+        return $result;
     }
 }
