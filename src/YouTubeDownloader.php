@@ -174,7 +174,6 @@ class YouTubeDownloader
 
                     $return[] = array(
                         'url' => $item['url'],
-                        'itag' => $itag,
                         'format' => $parser->parseItagInfo($itag)
                     );
 
@@ -192,12 +191,11 @@ class YouTubeDownloader
                 // redirector.googlevideo.com
                 $return[] = array(
                     'url' => $url . '&' . $sp . '=' . $decoded_signature,
-                    'itag' => $itag,
                     'format' => $parser->parseItagInfo($itag)
                 );
             }
 
-            return $return;
+            return array_filter($return,'strlen');
 
         } catch (\Exception $exception) {
             // do nothing
