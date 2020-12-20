@@ -177,7 +177,9 @@ class YouTubeDownloader
                     }else{
                         $return[] = array(
                             'url' => $item['url'],
-                            'format' => $myFormat
+                            'format' => $myFormat,
+                            'type' => $parser->parseItagType($itag),
+                            'quality' => $parser->parseItagQuality($itag)
                         );
                     }
                     
@@ -199,7 +201,9 @@ class YouTubeDownloader
                 }else{
                     $return[] = array(
                         'url' => $url . '&' . $sp . '=' . $decoded_signature,
-                        'format' => $myFormat2
+                        'format' => $myFormat2,
+                        'type' => $parser->parseItagType($itag),
+                        'quality' => $parser->parseItagQuality($itag)
                     );
                 }
                 
