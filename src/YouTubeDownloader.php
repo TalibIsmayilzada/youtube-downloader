@@ -171,11 +171,16 @@ class YouTubeDownloader
 
                 // some videos do not need to be decrypted!
                 if (isset($item['url'])) {
-
-                    $return[] = array(
-                        'url' => $item['url'],
-                        'format' => $parser->parseItagInfo($itag)
-                    );
+                    $myFormat = $parser->parseItagInfo($itag);
+                    if($myFormat === NULL){
+                        
+                    }else{
+                        $return[] = array(
+                            'url' => $item['url'],
+                            'format' => $myFormat
+                        );
+                    }
+                    
 
                     continue;
                 }
@@ -195,7 +200,7 @@ class YouTubeDownloader
                 );
             }
 
-            return array_filter($return,'strlen');
+            return $return;
 
         } catch (\Exception $exception) {
             // do nothing
