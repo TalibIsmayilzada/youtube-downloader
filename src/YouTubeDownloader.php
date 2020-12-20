@@ -194,10 +194,15 @@ class YouTubeDownloader
                 $decoded_signature = (new SignatureDecoder())->decode($signature, $js_code);
 
                 // redirector.googlevideo.com
-                $return[] = array(
-                    'url' => $url . '&' . $sp . '=' . $decoded_signature,
-                    'format' => $parser->parseItagInfo($itag)
-                );
+                $myFormat2 = $parser->parseItagInfo($itag);
+                if($myFormat2 === NULL){
+                }else{
+                    $return[] = array(
+                        'url' => $url . '&' . $sp . '=' . $decoded_signature,
+                        'format' => $myFormat2
+                    );
+                }
+                
             }
 
             return $return;
