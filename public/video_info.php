@@ -18,6 +18,6 @@ $error = $youtube->getLastError();
 header('Content-Type: application/json');
 echo json_encode([
     'links' => $links,
-    'thumbnail' => $thumbnail,
+    'thumbnails' => $thumbnail,
     'error' => $error
 ], JSON_PRETTY_PRINT);
