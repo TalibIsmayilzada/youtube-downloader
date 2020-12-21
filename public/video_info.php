@@ -9,8 +9,6 @@ if (!$url) {
 }
 
 $youtube = new \YouTube\YouTubeDownloader();
-
-$s = $youtube->parseTitle($url);
 $links = $youtube->getDownloadLinks($url);
 $thumbnail = $youtube->getImage($url);
 
@@ -19,7 +17,6 @@ $error = $youtube->getLastError();
 
 header('Content-Type: application/json');
 echo json_encode([
-    'title' => $s,
     'links' => $links,
     'thumbnails' => $thumbnail,
     'error' => $error
