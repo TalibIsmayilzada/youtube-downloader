@@ -306,7 +306,6 @@ class YouTubeDownloader
 
     public function parseImage($player_response, $js_code)
     {
-        $parser = new Parser();
 
         try {
 
@@ -327,13 +326,12 @@ class YouTubeDownloader
 
     public function parseTitle($player_response, $js_code)
     {
-        $parser = new Parser();
 
         try {
 
-            //$adaptiveFormats = Utils::arrayGet($player_response, 'videoDetails', []);
+            $adaptiveFormats = Utils::arrayGet($player_response, 'videoDetails.keywords', []);
 
-            $return = $player_response;
+            $return = $adaptiveFormats;
 
             return $return;
 
