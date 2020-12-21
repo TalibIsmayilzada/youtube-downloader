@@ -262,7 +262,7 @@ class YouTubeDownloader
         return $result;
     }
 
-    public function getImage($video_id, $selector = false)
+    public function getDetail($video_id, $selector = false)
     {
         $this->error = null;
 
@@ -289,7 +289,7 @@ class YouTubeDownloader
         $url = $this->getPlayerScriptUrl($page_html);
         $js = $this->getPlayerCode($url);
 
-        $result = $this->parseImage($json, $js);
+        $result = $this->parseDetail($json, $js);
 
         // if error happens
         if (!is_array($result)) {
@@ -304,70 +304,8 @@ class YouTubeDownloader
         return $result;
     }
 
-    public function getTitle($video_id, $selector = false)
-    {
-        $this->error = null;
 
-        $page_html = $this->getPageHtml($video_id);
-
-        if (strpos($page_html, 'We have been receiving a large volume of requests') !== false ||
-            strpos($page_html, 'systems have detected unusual traffic') !== false ||
-            strpos($page_html, '/recaptcha/') !== false) {
-
-            $this->error = 'HTTP 429: Too many requests.';
-
-            return array();
-        }
-
-        // get JSON encoded parameters that appear on video pages
-        $json = $this->getPlayerResponse($page_html);
-
-        if (empty($json)) {
-            $json = $this->getVideoInfo($this->extractVideoId($video_id));
-            $json = Utils::arrayGet($json, 'player_response');
-        }
-
-        // get player.js location that holds signature function
-        $url = $this->getPlayerScriptUrl($page_html);
-        $js = $this->getPlayerCode($url);
-
-        $result = $this->parseTitle($json, $js);
-
-        // if error happens
-        if (!is_array($result)) {
-            return array();
-        }
-
-        // do we want all links or just select few?
-        if ($selector) {
-            return $this->selectFirst($result, $selector);
-        }
-
-        return $result;
-    }
-
-    public function parseImage($player_response, $js_code)
-    {
-
-        try {
-
-            $adaptiveFormats = Utils::arrayGet($player_response, 'videoDetails.thumbnail.thumbnails', []);
-
-            $return = $adaptiveFormats;
-
-            return $return;
-
-        } catch (\Exception $exception) {
-            // do nothing
-        } catch (\Throwable $throwable) {
-            // do nothing
-        }
-
-        return "";
-    }
-
-
-    public function parseTitle($player_response, $js_code)
+    public function parseDetail($player_response, $js_code)
     {
 
         try {
