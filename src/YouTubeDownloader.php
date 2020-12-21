@@ -259,7 +259,7 @@ class YouTubeDownloader
             return $this->selectFirst($result, $selector);
         }
 
-        return $json;
+        return $result;
     }
 
     public function getImage($video_id, $selector = false)
@@ -322,6 +322,27 @@ class YouTubeDownloader
             // do nothing
         }
 
-        return null;
+        return "";
+    }
+
+    public function parseTitle($player_response, $js_code)
+    {
+        $parser = new Parser();
+
+        try {
+
+            $adaptiveFormats = Utils::arrayGet($player_response, 'videoDetails.title', []);
+
+            $return = $adaptiveFormats;
+
+            return $return;
+
+        } catch (\Exception $exception) {
+            // do nothing
+        } catch (\Throwable $throwable) {
+            // do nothing
+        }
+
+        return "";
     }
 }
