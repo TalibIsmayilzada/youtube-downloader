@@ -10,7 +10,7 @@ if (!$url) {
 
 $youtube = new \YouTube\YouTubeDownloader();
 $links = $youtube->getDownloadLinks($url);
-$title = $youtube->parseTitle($url);
+$title = $youtube->getTitle($url);
 $thumbnail = $youtube->getImage($url);
 
 
