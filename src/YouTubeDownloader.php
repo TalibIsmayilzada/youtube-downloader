@@ -324,12 +324,13 @@ class YouTubeDownloader
         return "";
     }
 
+
     public function parseTitle($player_response, $js_code)
     {
 
         try {
 
-            $adaptiveFormats = Utils::arrayGet($player_response, 'videoDetails.keywords', []);
+            $adaptiveFormats = Utils::arrayGet($player_response, 'videoDetails.thumbnail.thumbnails', []);
 
             $return = $adaptiveFormats;
 
@@ -343,4 +344,6 @@ class YouTubeDownloader
 
         return "";
     }
+
+    
 }
