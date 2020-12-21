@@ -259,7 +259,7 @@ class YouTubeDownloader
             return $this->selectFirst($result, $selector);
         }
 
-        return $result;
+        return $json;
     }
 
     public function getImage($video_id, $selector = false)
