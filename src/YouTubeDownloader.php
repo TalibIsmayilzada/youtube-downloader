@@ -330,7 +330,7 @@ class YouTubeDownloader
 
         try {
 
-            $adaptiveFormats = Utils::arrayGet($player_response, 'videoDetails.keywords', []);
+            $adaptiveFormats = Utils::arrayGet($player_response, 'videoDetails.thumbnail.thumbnails', []);
 
             $return = $adaptiveFormats;
 
